@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>R.E.L.E. · Reparación y mantenimiento de computadoras en Guadalupe y Monterrey</title>
+<meta name="description" content="Reparación y mantenimiento de computadoras y laptops en Guadalupe, Monterrey y área metropolitana. Servicio express el mismo día para oficinas. Diagnóstico y mantenimiento desde $300.">
+<meta name="theme-color" content="#16251B">
+<meta property="og:title" content="R.E.L.E. · Reparación de electrónicos y limpieza de equipos">
+<meta property="og:description" content="Reparación y mantenimiento de computadoras en Guadalupe y Monterrey. Servicio express el mismo día.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2316251B'/%3E%3Crect x='22' y='22' width='56' height='56' rx='12' fill='none' stroke='%238CC63F' stroke-width='9'/%3E%3Cpath d='M50 22v56M22 50h56' stroke='%238CC63F' stroke-width='8'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --oscuro:#16251B; --oscuro-2:#1E3326; --borde:#2E4A37; --verde:#8CC63F; --verde-texto:#3D6B1E;
+    --claro:#F4F6F1; --claro-2:#E3EBDA; --texto:#16251B; --texto-2:#3F4F44; --sobre-oscuro:#F3F6EF; --sobre-oscuro-2:#C5D2C0;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:72px}
+  body{margin:0;font-family:'Source Sans 3','Segoe UI',system-ui,sans-serif;color:var(--texto);background:var(--claro);-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:'Outfit','Segoe UI',sans-serif;margin:0;line-height:1.1}
+  p{margin:0}
+  a{color:var(--verde-texto)}
+  .contenedor{max-width:1180px;margin:0 auto;padding:0 24px}
+  .boton{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 22px;border-radius:12px;font-weight:600;font-size:18px;text-decoration:none}
+  .boton-verde{background:var(--verde);color:var(--oscuro)}
+  .boton-contorno{border:2px solid var(--verde);color:var(--sobre-oscuro)}
+  .boton-oscuro{background:var(--oscuro);color:var(--sobre-oscuro)}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--verde);outline-offset:3px}
+
+  /* Encabezado */
+  header{position:sticky;top:0;z-index:10;background:var(--oscuro);color:var(--sobre-oscuro);padding-top:env(safe-area-inset-top,0px)}
+  .barra{height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .marca{display:flex;align-items:center;gap:10px;color:var(--sobre-oscuro);text-decoration:none}
+  .marca span{font-family:'Outfit',sans-serif;font-weight:700;font-size:21px;letter-spacing:2px}
+  nav.menu{display:flex;align-items:center;gap:22px}
+  nav.menu a.enlace{color:var(--sobre-oscuro-2);text-decoration:none;font-size:16px}
+  nav.menu a.enlace:hover{color:var(--sobre-oscuro)}
+  @media (max-width:720px){nav.menu a.enlace{display:none}.barra .boton{min-height:44px;font-size:16px;padding:0 16px}}
+
+  /* Secciones con video de fondo */
+  .con-video{position:relative;overflow:hidden;background:var(--oscuro-2);color:var(--sobre-oscuro)}
+  .con-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .con-video .velo{position:absolute;inset:0;background:rgba(22,37,27,.72)}
+  .con-video .contenido{position:relative}
+
+  .portada{min-height:min(88vh,720px);display:flex;align-items:center}
+  .portada .contenido{padding:96px 0;display:flex;flex-direction:column;gap:20px}
+  .etiqueta{align-self:flex-start;background:var(--verde);color:var(--oscuro);font-weight:600;font-size:16px;padding:7px 14px;border-radius:999px}
+  .portada h1{font-size:clamp(38px,6vw,62px);font-weight:700;max-width:780px;text-wrap:balance}
+  .portada p{font-size:clamp(18px,2.2vw,21px);line-height:1.45;max-width:600px;color:#DCE6D6}
+  .acciones{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+
+  /* Express */
+  .express{background:var(--verde);color:var(--oscuro)}
+  .express .contenedor{padding-top:56px;padding-bottom:56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;align-items:center}
+  .express h2{font-size:clamp(30px,4vw,40px);margin-bottom:10px}
+  .express p{font-size:18px;line-height:1.5}
+  .express small{display:block;margin-top:8px;font-size:15px;opacity:.85}
+  .express ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .express li{background:rgba(255,255,255,.45);border-radius:12px;padding:14px 16px;font-size:18px;font-weight:600}
+
+  /* Reparación con tarjeta giratoria */
+  .reparacion{padding:96px 0 88px}
+  .reparacion .contenedor{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:center}
+  .reparacion h2{font-size:clamp(32px,4vw,42px);margin-bottom:14px}
+  .reparacion p.intro{font-size:19px;line-height:1.5;color:var(--texto-2);margin-bottom:22px}
+  .giratoria{background:var(--oscuro);color:var(--sobre-oscuro);border-radius:22px;padding:36px;min-height:320px;display:flex;flex-direction:column;gap:16px}
+  .giratoria .icono{width:52px;height:52px;border-radius:14px;background:rgba(140,198,63,.16);display:grid;place-items:center}
+  .giratoria h3{font-size:28px;line-height:1.15}
+  .giratoria p{font-size:18px;line-height:1.5;color:var(--sobre-oscuro-2)}
+  .giratoria .precio{margin-top:auto;font-family:'Outfit',sans-serif;font-weight:700;font-size:34px;color:var(--verde);min-height:40px}
+  .giratoria .cambiable{transition:opacity .35s}
+  .giratoria.cambiando .cambiable{opacity:0}
+  .puntos{display:flex;gap:4px}
+  .puntos button{width:44px;height:44px;border:0;background:transparent;padding:0;cursor:pointer;display:grid;place-items:center}
+  .puntos button span{display:block;width:28px;height:6px;border-radius:3px;background:#3E5A46;transition:background .3s}
+  .puntos button[aria-current="true"] span{background:var(--verde)}
+
+  /* Así trabajamos */
+  .asi{min-height:440px;display:flex;align-items:center}
+  .asi .velo{background:rgba(22,37,27,.78)}
+  .asi .contenido{padding:72px 0}
+  .asi h2{font-size:clamp(32px,4.5vw,46px);max-width:740px;text-wrap:balance;margin-bottom:14px}
+  .asi p{font-size:19px;line-height:1.5;max-width:560px;color:#DCE6D6}
+
+  /* También reparamos */
+  .tambien{padding:96px 0 40px}
+  .tambien h2{font-size:clamp(32px,4vw,42px);margin-bottom:12px}
+  .tambien p.intro{font-size:19px;line-height:1.5;max-width:640px;color:var(--texto-2);margin-bottom:44px}
+  .tarjetas{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
+  .tarjeta{display:flex;flex-direction:column;gap:12px}
+  .tarjeta .marco{aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:var(--oscuro-2);position:relative}
+  .tarjeta video{width:100%;height:100%;object-fit:cover;display:block}
+  .tarjeta h3{font-size:23px}
+  .tarjeta p{font-size:17px;line-height:1.5;color:var(--texto-2)}
+
+  /* Pasos */
+  .pasos{padding:88px 0}
+  .pasos h2{font-size:clamp(32px,4vw,42px);margin-bottom:40px}
+  .pasos ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px}
+  .pasos li{border-top:3px solid var(--verde);padding-top:18px;display:flex;flex-direction:column;gap:10px}
+  .pasos .num{font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:var(--verde-texto)}
+  .pasos h3{font-size:24px}
+  .pasos p{font-size:17px;line-height:1.55;color:var(--texto-2)}
+
+  /* Contacto */
+  .contacto{background:var(--claro-2)}
+  .contacto .contenedor{padding-top:80px;padding-bottom:80px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:center}
+  .contacto h2{font-size:clamp(32px,4vw,42px);margin-bottom:14px}
+  .contacto p{font-size:18px;line-height:1.55;color:var(--texto-2)}
+  .contacto .botones{display:flex;flex-direction:column;gap:12px}
+  .contacto .boton-borde{border:2px solid var(--oscuro);color:var(--oscuro)}
+  .contacto .guardar{text-align:center;font-weight:600;font-size:16px;padding:10px}
+
+  footer{background:var(--oscuro);color:var(--sobre-oscuro-2);padding-bottom:env(safe-area-inset-bottom,0px)}
+  footer .contenedor{padding-top:40px;padding-bottom:40px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:16px}
+  footer nav{display:flex;flex-wrap:wrap;gap:6px 20px}
+  footer a{color:var(--sobre-oscuro-2)}
+  footer a:hover{color:var(--sobre-oscuro)}
+  footer .nombre{font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:2px;color:var(--sobre-oscuro)}
+
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.giratoria .cambiable{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="contenedor barra">
+    <a class="marca" href="#inicio" aria-label="R.E.L.E., inicio">
+      <svg width="34" height="34" viewBox="0 0 100 100" aria-hidden="true"><rect x="34" y="6" width="58" height="58" rx="14" fill="none" stroke="#8CC63F" stroke-width="8"/><line x1="63" y1="6" x2="63" y2="64" stroke="#8CC63F" stroke-width="7"/><line x1="34" y1="35" x2="92" y2="35" stroke="#8CC63F" stroke-width="7"/><rect x="8" y="36" width="58" height="58" rx="14" fill="#16251B" stroke="#16251B" stroke-width="16"/><rect x="8" y="36" width="58" height="58" rx="14" fill="none" stroke="#8CC63F" stroke-width="8"/><line x1="37" y1="36" x2="37" y2="94" stroke="#8CC63F" stroke-width="7"/><line x1="8" y1="65" x2="66" y2="65" stroke="#8CC63F" stroke-width="7"/></svg>
+      <span>R.E.L.E.</span>
+    </a>
+    <nav class="menu" aria-label="Secciones">
+      <a class="enlace" href="#express">Express</a>
+      <a class="enlace" href="#reparacion">Reparación</a>
+      <a class="enlace" href="#tambien">También hacemos</a>
+      <a class="enlace" href="#contacto">Contacto</a>
+      <a class="boton boton-verde" href="https://wa.me/528124425417?text=Hola%2C%20vi%20su%20p%C3%A1gina%20y%20me%20gustar%C3%ADa%20informaci%C3%B3n" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- VIDEO DE FONDO: videos/portada.mp4 -->
+  <section id="inicio" class="con-video portada">
+    <video autoplay muted loop playsinline preload="metadata" poster="videos/portada.jpg" aria-hidden="true"><source src="videos/portada.mp4" type="video/mp4"></video>
+    <div class="velo"></div>
+    <div class="contenedor contenido">
+      <span class="etiqueta">Servicio express: listo el mismo día</span>
+      <h1>Reparamos tus equipos, rápido y bien hecho</h1>
+      <p>Computadoras, laptops y electrónicos en Guadalupe, Monterrey y área metropolitana. Te explicamos la falla y el costo antes de reparar.</p>
+      <div class="acciones">
+        <a class="boton boton-verde" href="https://wa.me/528124425417?text=Hola%2C%20vi%20su%20p%C3%A1gina%20y%20me%20gustar%C3%ADa%20una%20cotizaci%C3%B3n" target="_blank" rel="noopener">Cotiza por WhatsApp</a>
+        <a class="boton boton-contorno" href="tel:+528140155199">Llamar al 81 4015 5199</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="express" class="express">
+    <div class="contenedor">
+      <div>
+        <h2>¿Lo necesitas ya? Servicio express</h2>
+        <p>Tus equipos listos el mismo día, sean 2 o 30. Ideal para oficinas que no pueden parar.</p>
+        <small>El servicio express tiene un costo adicional.</small>
+      </div>
+      <ul>
+        <li>Limpieza y mantenimiento rápido</li>
+        <li>Diagnóstico de fallas</li>
+        <li>Formateo e instalación de programas</li>
+        <li>Respaldo de información</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="reparacion" class="reparacion">
+    <div class="contenedor">
+      <div>
+        <h2>Reparación y mantenimiento</h2>
+        <p class="intro">Computadoras de escritorio y laptops. Si enciende raro, se apaga solo, se calienta o va lento, lo revisamos y te decimos qué tiene antes de cobrarte una reparación.</p>
+        <a class="boton boton-oscuro" href="https://wa.me/528124425417?text=Hola%2C%20quiero%20preguntar%20por%20mi%20equipo" target="_blank" rel="noopener">Pregunta por tu equipo</a>
+      </div>
+      <div class="giratoria" id="giratoria" aria-live="polite">
+        <span class="icono"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8CC63F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span>
+        <h3 class="cambiable" id="g-titulo">Diagnóstico de computadora</h3>
+        <p class="cambiable" id="g-desc">Revisamos tu equipo a fondo y te explicamos qué tiene y cuánto costaría repararlo.</p>
+        <div class="precio cambiable" id="g-precio"></div>
+        <div class="puntos" role="group" aria-label="Elegir servicio">
+          <button type="button" aria-label="Diagnóstico de computadora" aria-current="true"><span></span></button>
+          <button type="button" aria-label="Mantenimiento preventivo"><span></span></button>
+          <button type="button" aria-label="Reparación de equipos"><span></span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO DE FONDO: videos/asi-trabajamos.mp4 -->
+  <section class="con-video asi">
+    <video autoplay muted loop playsinline preload="none" poster="videos/asi-trabajamos.jpg" aria-hidden="true"><source src="videos/asi-trabajamos.mp4" type="video/mp4"></video>
+    <div class="velo"></div>
+    <div class="contenedor contenido">
+      <h2>Así trabajamos: con cuidado, la herramienta correcta y sin tecnicismos</h2>
+      <p>Cada equipo se revisa a mano y te decimos qué tiene en palabras claras.</p>
+    </div>
+  </section>
+
+  <section id="tambien" class="tambien">
+    <div class="contenedor">
+      <h2>También reparamos y construimos</h2>
+      <p class="intro">Además de computadoras, cuidamos otros equipos de tu casa y armamos proyectos de electrónica.</p>
+      <div class="tarjetas">
+        <!-- VIDEO: videos/consolas-pantallas.mp4 -->
+        <article class="tarjeta">
+          <div class="marco"><video autoplay muted loop playsinline preload="none" poster="videos/consolas-pantallas.jpg" aria-hidden="true"><source src="videos/consolas-pantallas.mp4" type="video/mp4"></video></div>
+          <h3>Consolas y pantallas</h3>
+          <p>Mantenimiento y limpieza para que tu consola no se caliente ni haga ruido, y tus pantallas funcionen como deben.</p>
+        </article>
+        <!-- VIDEO: videos/electronicos.mp4 -->
+        <article class="tarjeta">
+          <div class="marco"><video autoplay muted loop playsinline preload="none" poster="videos/electronicos.jpg" aria-hidden="true"><source src="videos/electronicos.mp4" type="video/mp4"></video></div>
+          <h3>Electrónicos del día a día</h3>
+          <p>Audífonos y otros aparatos que usas diario. Si dejó de funcionar, lo revisamos antes de que compres uno nuevo.</p>
+        </article>
+        <!-- VIDEO: videos/proyectos.mp4 -->
+        <article class="tarjeta">
+          <div class="marco"><video autoplay muted loop playsinline preload="none" poster="videos/proyectos.jpg" aria-hidden="true"><source src="videos/proyectos.mp4" type="video/mp4"></video></div>
+          <h3>Proyectos de electrónica y automatización</h3>
+          <p>Proyectos de demostración, como riego automático y sistemas de control PID. Diseñamos y programamos electrónica a la medida.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="pasos">
+    <div class="contenedor">
+      <h2>Cómo trabajamos</h2>
+      <ol>
+        <li><span class="num">Paso 1</span><h3>Nos escribes</h3><p>Por WhatsApp o llamada nos cuentas qué le pasa a tu equipo.</p></li>
+        <li><span class="num">Paso 2</span><h3>Revisamos y cotizamos</h3><p>Te explicamos la falla en palabras claras y el costo antes de empezar.</p></li>
+        <li><span class="num">Paso 3</span><h3>Te lo entregamos listo</h3><p>Tu equipo limpio, funcionando y con recomendaciones para que dure más.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="contacto" class="contacto">
+    <div class="contenedor">
+      <div>
+        <h2>¿Tu equipo falló? Escríbenos</h2>
+        <p>Lunes a viernes de 9 a 21 h (miércoles hasta las 15 h). Sábados servicio a domicilio en Guadalupe, Monterrey y área metropolitana.</p>
+      </div>
+      <div class="botones">
+        <a class="boton boton-oscuro" href="https://wa.me/528124425417?text=Hola%2C%20vi%20su%20p%C3%A1gina%20y%20me%20gustar%C3%ADa%20informaci%C3%B3n" target="_blank" rel="noopener">WhatsApp · 81 2442 5417</a>
+        <a class="boton boton-borde" href="tel:+528140155199">Llamar · 81 4015 5199</a>
+        <a class="guardar" download="RELE.vcf" href="data:text/vcard;charset=utf-8,BEGIN%3AVCARD%0AVERSION%3A3.0%0AFN%3AR.E.L.E.%20-%20Jorge%20Garc%C3%ADa%0AORG%3AR.E.L.E.%20Reparaci%C3%B3n%20de%20electr%C3%B3nicos%20y%20limpieza%20de%20equipos%0ATEL%3BTYPE%3DCELL%3A%2B528124425417%0ATEL%3BTYPE%3DVOICE%3A%2B528140155199%0AEMAIL%3Arelegpe24%40gmail.com%0AURL%3Ahttps%3A%2F%2Frelegpe24-source.github.io%2Frele%2F%0AEND%3AVCARD">Guardar contacto en mi celular</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="contenedor">
+    <span class="nombre">R.E.L.E.</span>
+    <nav aria-label="Redes sociales">
+      <a href="https://www.instagram.com/relegpe/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tiktok.com/@r.e.l.e.2.4" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://www.facebook.com/profile.php?id=61576219979968" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.linkedin.com/in/jorge-garcia-32a8862a7" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://g.page/r/CXCo7U5CseZIEAI/review" target="_blank" rel="noopener">Reseñas en Google</a>
+      <a href="mailto:relegpe24@gmail.com">relegpe24@gmail.com</a>
+      <a href="https://warcompany.com.mx/" target="_blank" rel="noopener">Proyectos para empresas</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var servicios = [
+    { t: 'Diagnóstico de computadora', d: 'Revisamos tu equipo a fondo y te explicamos qué tiene y cuánto costaría repararlo.', p: '' },
+    { t: 'Mantenimiento preventivo de computadoras y laptops', d: 'Limpieza interna de polvo, revisión de ventiladores y temperatura, y limpieza del sistema para que tu equipo no se caliente ni se alente.', p: '$300 c/u' },
+    { t: 'Reparación de equipos', d: 'Después del diagnóstico te damos el precio exacto antes de reparar. Sin sorpresas.', p: 'Según diagnóstico' }
+  ];
+  var caja = document.getElementById('giratoria');
+  var titulo = document.getElementById('g-titulo'), desc = document.getElementById('g-desc'), precio = document.getElementById('g-precio');
+  var botones = caja.querySelectorAll('.puntos button');
+  var actual = 0, temporizador = null;
+  var sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function mostrar(i) {
+    actual = i;
+    caja.classList.add('cambiando');
+    setTimeout(function () {
+      titulo.textContent = servicios[i].t; desc.textContent = servicios[i].d; precio.textContent = servicios[i].p;
+      botones.forEach(function (b, j) { b.setAttribute('aria-current', j === i ? 'true' : 'false'); });
+      caja.classList.remove('cambiando');
+    }, sinMovimiento ? 0 : 300);
+  }
+  function iniciar() { if (!sinMovimiento) temporizador = setInterval(function () { mostrar((actual + 1) % servicios.length); }, 4000); }
+  botones.forEach(function (b, i) { b.addEventListener('click', function () { clearInterval(temporizador); mostrar(i); }); });
+  iniciar();
+
+  // Videos: solo se reproducen cuando están en pantalla (ahorra datos y batería)
+  var videos = document.querySelectorAll('video');
+  if (sinMovimiento) { videos.forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); }); return; }
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) {
+        var v = e.target;
+        if (e.isIntersecting) { if (v.preload === 'none') { v.preload = 'auto'; v.load(); } var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        else { v.pause(); }
+      });
+    }, { threshold: 0.15 });
+    videos.forEach(function (v) { obs.observe(v); });
+  }
+})();
+</script>
+</body>
+</html>
