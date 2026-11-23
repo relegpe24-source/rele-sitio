@@ -53,6 +53,16 @@ main{flex:1;display:flex;flex-direction:column}
 .opcion:hover{border-color:var(--verde);background:rgba(140,198,63,.06)}
 .opcion:active{transform:scale(.985)}
 
+.opcion.otro{border-style:dashed;color:var(--texto-2)}
+.otro-caja{display:flex;flex-direction:column;gap:10px;padding:14px;border:2px solid var(--verde);border-radius:14px;background:#fff}
+.otro-caja input{font:inherit;font-size:18px;padding:12px 14px;border-radius:10px;border:1.5px solid var(--claro-2);color:var(--texto)}
+.otro-caja input:focus{outline:3px solid var(--verde);border-color:var(--verde)}
+.otro-caja button{align-self:flex-start;padding:12px 22px;border:0;border-radius:10px;background:var(--verde);color:var(--oscuro);font:700 17px 'Source Sans 3',sans-serif;cursor:pointer}
+.otro-caja button:disabled{opacity:.45;cursor:default}
+.extra-caja{margin:0 0 32px;padding:18px 20px;border-radius:16px;background:#fff;border:2px dashed var(--verde)}
+.extra-caja h3{font-size:19px;margin-bottom:6px}
+.extra-caja p{font-size:16px;color:var(--texto-2);margin-bottom:8px;line-height:1.45}
+.extra-caja ul{margin:0;padding-left:20px;font-size:16px;line-height:1.5}
 .tablero-titulo{font-size:13px;text-transform:uppercase;letter-spacing:2px;color:var(--sobre-oscuro-2);margin-bottom:16px;font-weight:600}
 .tablero-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .modulo-card{padding:12px;border-radius:12px;border:1.5px solid var(--borde);background:var(--oscuro-2);transition:border-color .4s,background .4s}
@@ -166,6 +176,11 @@ footer .nombre{font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:2p
       <h2>Tu negocio necesita esto</h2>
       <p class="subtitulo" id="resultado-subtitulo"></p>
       <div class="resultado-grid" id="resultado-grid"></div>
+      <div class="extra-caja" id="extra-caja" hidden>
+        <h3>✍️ Lo que nos contaste aparte</h3>
+        <p>Esto no estaba en las opciones. Lo revisamos contigo para armarlo a la medida:</p>
+        <ul id="extra-lista"></ul>
+      </div>
       <div class="resultado-cta">
         <h3>Tu negocio funcionando,<br>aunque t&uacute; no est&eacute;s</h3>
         <div class="precio">Desde $100 al mes</div>
@@ -482,6 +497,7 @@ footer .nombre{font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:2p
   var modulosActivos = {};
   var indicePregunta = 0;
   var ultimaFrase = '';
+  var extras = [];   // respuestas escritas en "Otro"
 
   /* ═══════════════════
      MOTOR
@@ -546,13 +562,33 @@ footer .nombre{font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:2p
     p.opciones.forEach(function (o, i) {
       html += '<button class="opcion" data-i="' + i + '">' + o.texto + '</button>';
     });
+    // Opción para escribir algo que no está en la lista
+    html += '<button class="opcion otro" id="btn-otro">' + (p.id === 'giro' ? 'Otro giro (escríbelo)' : 'Otro (escríbelo)') + '</button>'
+         + '<div class="otro-caja" id="otro-caja" hidden>'
+         + '<label for="otro-texto" style="font-weight:600">' + (p.id === 'giro' ? '¿A qué se dedica tu negocio?' : 'Cuéntanos con tus palabras') + '</label>'
+         + '<input id="otro-texto" maxlength="120" autocomplete="off">'
+         + '<button type="button" id="otro-ok" disabled>Continuar &rarr;</button></div>';
     var caja = document.getElementById('opciones');
     caja.innerHTML = html;
     caja.classList.remove('slide-in');
     void caja.offsetWidth;
     caja.classList.add('slide-in');
 
-    caja.querySelectorAll('.opcion').forEach(function (btn) {
+    var btnOtro = document.getElementById('btn-otro'), cajaOtro = document.getElementById('otro-caja');
+    var inpOtro = document.getElementById('otro-texto'), okOtro = document.getElementById('otro-ok');
+    btnOtro.addEventListener('click', function () { btnOtro.hidden = true; cajaOtro.hidden = false; inpOtro.focus(); });
+    inpOtro.addEventListener('input', function () { okOtro.disabled = !inpOtro.value.trim(); });
+    function confirmarOtro() {
+      var t = inpOtro.value.trim(); if (!t) return;
+      if (p.id === 'giro') { respuestas.giro = 'otro'; respuestas.giroTexto = t; }
+      else { respuestas[p.id] = 'Otro: ' + t; extras.push(p.texto + ' → ' + t); }
+      indicePregunta++;
+      renderPregunta();
+    }
+    okOtro.addEventListener('click', confirmarOtro);
+    inpOtro.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); confirmarOtro(); } });
+
+    caja.querySelectorAll('.opcion:not(.otro)').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var idx = parseInt(this.getAttribute('data-i'), 10);
         var op = p.opciones[idx];
@@ -583,9 +619,10 @@ footer .nombre{font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:2p
 
     var giroTexto = '';
     GIROS.forEach(function (g) { if (g.valor === respuestas.giro) giroTexto = g.texto; });
+    if (respuestas.giro === 'otro') giroTexto = respuestas.giroTexto;
 
     document.getElementById('resultado-subtitulo').textContent =
-      'Para tu ' + giroTexto.toLowerCase() + ', encontré ' + activos.length + ' módulo' + (activos.length !== 1 ? 's' : '') + ' que te van a servir:';
+      (respuestas.giro === 'otro' ? 'Para tu negocio (' + giroTexto.toLowerCase() + ')' : 'Para tu ' + giroTexto.toLowerCase()) + ', encontré ' + activos.length + ' módulo' + (activos.length !== 1 ? 's' : '') + ' que te van a servir:';
 
     var html = '';
     activos.forEach(function (m) {
@@ -596,8 +633,15 @@ footer .nombre{font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:2p
     });
     document.getElementById('resultado-grid').innerHTML = html;
 
+    var extraCaja = document.getElementById('extra-caja'), extraLista = document.getElementById('extra-lista');
+    extraLista.innerHTML = '';
+    extras.forEach(function (x) { var li = document.createElement('li'); li.textContent = x; extraLista.appendChild(li); });
+    extraCaja.hidden = extras.length === 0;
+
     var lista = activos.map(function (m) { return '• ' + m.nombre; }).join('\n');
-    var msg = 'Hola, hice el cuestionario en su página.\n\nMi negocio: ' + giroTexto + '\n\nMi sistema necesita:\n' + lista + '\n\nMe interesa saber más.';
+    var msg = 'Hola, hice el cuestionario en su página.\n\nMi negocio: ' + giroTexto + '\n\nMi sistema necesita:\n' + lista
+      + (extras.length ? '\n\nAdemás les conté:\n' + extras.map(function (x) { return '• ' + x; }).join('\n') : '')
+      + '\n\nMe interesa saber más.';
     document.getElementById('wa-boton').href = 'https://wa.me/528124425417?text=' + encodeURIComponent(msg);
   }
 
@@ -606,6 +650,7 @@ footer .nombre{font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:2p
     modulosActivos = {};
     indicePregunta = 0;
     ultimaFrase = '';
+    extras = [];
     document.getElementById('frase').classList.remove('visible');
     document.getElementById('frase').textContent = '';
     pantalla('pantalla-intro');
