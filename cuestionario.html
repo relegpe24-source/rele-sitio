@@ -59,6 +59,18 @@ main{flex:1;display:flex;flex-direction:column}
 .otro-caja input:focus{outline:3px solid var(--verde);border-color:var(--verde)}
 .otro-caja button{align-self:flex-start;padding:12px 22px;border:0;border-radius:10px;background:var(--verde);color:var(--oscuro);font:700 17px 'Source Sans 3',sans-serif;cursor:pointer}
 .otro-caja button:disabled{opacity:.45;cursor:default}
+.datos{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px;background:var(--claro)}
+.datos form{width:100%;max-width:480px;background:#fff;border-radius:20px;padding:28px 24px;display:grid;gap:14px;border:2px solid var(--claro-2)}
+.datos h2{font-size:clamp(24px,4vw,30px);line-height:1.2}
+.datos p.sub{font-size:17px;color:var(--texto-2);margin-top:-4px}
+.datos label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:16px}
+.datos input[type=text],.datos input[type=tel],.datos input[type=email]{font:inherit;font-weight:400;font-size:18px;padding:12px 14px;border-radius:10px;border:1.5px solid #C9D4C1}
+.datos input:focus{outline:3px solid var(--verde);border-color:var(--verde)}
+.datos .acepto{flex-direction:row;align-items:flex-start;gap:10px;font-weight:400;font-size:15px;color:var(--texto-2)}
+.datos .acepto input{width:20px;height:20px;margin-top:2px;accent-color:#3D6B1E}
+.datos button[type=submit]{min-height:54px;border:0;border-radius:12px;background:var(--verde);color:var(--oscuro);font:700 18px 'Outfit',sans-serif;cursor:pointer}
+.datos .saltar{background:none;border:0;color:var(--texto-2);text-decoration:underline;font:inherit;font-size:15px;cursor:pointer;justify-self:center}
+.oculto{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .extra-caja{margin:0 0 32px;padding:18px 20px;border-radius:16px;background:#fff;border:2px dashed var(--verde)}
 .extra-caja h3{font-size:19px;margin-bottom:6px}
 .extra-caja p{font-size:16px;color:var(--texto-2);margin-bottom:8px;line-height:1.45}
@@ -164,6 +176,22 @@ footer .nombre{font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:2p
     </div>
   </section>
 
+  <section class="datos" id="pantalla-datos" hidden>
+    <form id="form-datos" novalidate>
+      <h2>¡Ya tengo tu resultado! 🎯</h2>
+      <p class="sub">¿A quién se lo mando? Te contactamos para explicártelo sin compromiso.</p>
+      <label>Tu nombre <input type="text" name="nombre" autocomplete="name" required></label>
+      <label>WhatsApp <input type="tel" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="81 1234 5678" required></label>
+      <label>Correo (opcional) <input type="email" name="correo" autocomplete="email"></label>
+      <label>Nombre de tu negocio (opcional) <input type="text" name="negocio" autocomplete="organization"></label>
+      <label class="oculto" aria-hidden="true">No llenar <input type="text" name="sitio_web" tabindex="-1" autocomplete="off"></label>
+      <label class="acepto"><input type="checkbox" name="acepta" required> <span>Acepto el <a href="aviso.html" target="_blank" rel="noopener">aviso de privacidad</a> y que me contacten.</span></label>
+      <p id="datos-error" style="color:#B42318;font-size:15px;margin:0" hidden>Escribe tu nombre, un WhatsApp de 10 dígitos y acepta el aviso.</p>
+      <button type="submit">Ver mi resultado</button>
+      <button type="button" class="saltar" id="btn-saltar">Ver resultado sin dejar mis datos</button>
+    </form>
+  </section>
+
   <section class="adivinando" id="pantalla-adivinando" hidden>
     <div>
       <h2 id="texto-adivinando">Analizando tu negocio&hellip;</h2>
@@ -200,6 +228,7 @@ footer .nombre{font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:2p
   <span class="nombre">R.E.L.E.</span> &middot; <a href="index.html">Volver al sitio</a>
 </footer>
 
+<script src="contactos.js"></script>
 <script>
 (function () {
   /* ═══════════════════════════════════════════
@@ -509,7 +538,7 @@ footer .nombre{font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:2p
   }
 
   function pantalla(id) {
-    ['pantalla-intro', 'pantalla-pregunta', 'pantalla-adivinando', 'pantalla-resultado'].forEach(function (pid) {
+    ['pantalla-intro', 'pantalla-pregunta', 'pantalla-datos', 'pantalla-adivinando', 'pantalla-resultado'].forEach(function (pid) {
       document.getElementById(pid).hidden = (pid !== id);
     });
   }
@@ -547,7 +576,7 @@ footer .nombre{font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:2p
 
   function renderPregunta() {
     var lista = filtrar();
-    if (indicePregunta >= lista.length) { mostrarAdivinando(); return; }
+    if (indicePregunta >= lista.length) { pantalla('pantalla-datos'); return; }
 
     var p = lista[indicePregunta];
     var total = lista.length;
@@ -644,6 +673,26 @@ footer .nombre{font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:2p
       + '\n\nMe interesa saber más.';
     document.getElementById('wa-boton').href = 'https://wa.me/528124425417?text=' + encodeURIComponent(msg);
   }
+
+  function textoGiro() {
+    if (respuestas.giro === 'otro') return respuestas.giroTexto || 'Otro';
+    var t = ''; GIROS.forEach(function (g) { if (g.valor === respuestas.giro) t = g.texto; }); return t;
+  }
+  document.getElementById('form-datos').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target, tel = f.whatsapp.value.replace(/\D/g, '');
+    var ok = f.nombre.value.trim() && tel.length >= 10 && f.acepta.checked;
+    document.getElementById('datos-error').hidden = !!ok;
+    if (!ok) return;
+    var modulos = MODULOS.filter(function (m) { return modulosActivos[m.id]; }).map(function (m) { return m.nombre; });
+    if (typeof enviarContacto === 'function') enviarContacto({
+      origen: 'El Adivinador', tipo: 'Cuestionario', nombre: f.nombre.value.trim(), whatsapp: f.whatsapp.value.trim(),
+      correo: f.correo.value.trim(), negocio: f.negocio.value.trim(), giro: textoGiro(),
+      modulos: modulos, extras: extras, detalle: '', acepta: true, sitio_web: f.sitio_web.value
+    });
+    mostrarAdivinando();
+  });
+  document.getElementById('btn-saltar').addEventListener('click', mostrarAdivinando);
 
   function reiniciar() {
     respuestas = {};
