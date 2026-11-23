@@ -22,14 +22,13 @@
   h1,h2,h3{font-family:'Outfit','Segoe UI',sans-serif;margin:0;line-height:1.1}
   p{margin:0}
   a{color:var(--verde-texto)}
-  .contenedor{max-width:1180px;margin:0 auto;padding:0 24px}
+  .contenedor{max-width:1120px;margin:0 auto;padding:0 24px}
   .boton{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 22px;border-radius:12px;font-weight:600;font-size:18px;text-decoration:none}
   .boton-verde{background:var(--verde);color:var(--oscuro)}
   .boton-contorno{border:2px solid var(--verde);color:var(--sobre-oscuro)}
   .boton-oscuro{background:var(--oscuro);color:var(--sobre-oscuro)}
   a:focus-visible,button:focus-visible{outline:3px solid var(--verde);outline-offset:3px}
 
-  /* Encabezado */
   header{position:sticky;top:0;z-index:10;background:var(--oscuro);color:var(--sobre-oscuro);padding-top:env(safe-area-inset-top,0px)}
   .barra{height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px}
   .marca{display:flex;align-items:center;gap:10px;color:var(--sobre-oscuro);text-decoration:none}
@@ -39,133 +38,101 @@
   nav.menu a.enlace:hover{color:var(--sobre-oscuro)}
   @media (max-width:720px){nav.menu a.enlace{display:none}.barra .boton{min-height:44px;font-size:16px;padding:0 16px}}
 
-  /* Secciones con video de fondo */
-  .con-video{position:relative;overflow:hidden;background:var(--oscuro-2);color:var(--sobre-oscuro)}
-  .con-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .con-video .velo{position:absolute;inset:0;background:rgba(22,37,27,.72)}
-  .con-video .contenido{position:relative}
-
-  .portada{min-height:min(88vh,720px);display:flex;align-items:center}
-  .portada .contenido{padding:96px 24px;display:flex;flex-direction:column;gap:20px}
-  .etiqueta{align-self:flex-start;background:var(--verde);color:var(--oscuro);font-weight:600;font-size:16px;padding:7px 14px;border-radius:999px}
-  .portada h1{font-size:clamp(38px,6vw,62px);font-weight:700;max-width:780px;text-wrap:balance}
-  .portada p{font-size:clamp(18px,2.2vw,21px);line-height:1.45;max-width:600px;color:#DCE6D6}
+  /* Portada */
+  .portada{position:relative;overflow:hidden;background:var(--oscuro-2);color:var(--sobre-oscuro);min-height:min(72vh,600px);display:flex;align-items:center}
+  .portada video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .portada .velo{position:absolute;inset:0;background:rgba(22,37,27,.76)}
+  .portada .contenido{position:relative;padding:72px 24px;display:flex;flex-direction:column;gap:18px}
+  .etiqueta{align-self:flex-start;background:var(--verde);color:var(--oscuro);font-weight:600;font-size:15px;padding:7px 14px;border-radius:999px}
+  .portada h1{font-size:clamp(36px,5.6vw,58px);font-weight:700;max-width:760px;text-wrap:balance}
+  .portada p{font-size:clamp(17px,2vw,20px);line-height:1.45;max-width:560px;color:#DCE6D6}
   .acciones{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
 
-  /* Express */
-  .express{background:var(--verde);color:var(--oscuro)}
-  .express .contenedor{padding-top:56px;padding-bottom:56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;align-items:center}
-  .express h2{font-size:clamp(30px,4vw,40px);margin-bottom:10px}
-  .express p{font-size:18px;line-height:1.5}
-  .express small{display:block;margin-top:8px;font-size:15px;opacity:.85}
-  .express ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-  .express li{background:rgba(255,255,255,.45);border-radius:12px;padding:14px 16px;font-size:18px;font-weight:600}
+  /* ¿Qué necesitas? */
+  .necesitas{padding:72px 0}
+  .necesitas h2,.cotiza h2{font-size:clamp(28px,3.6vw,38px);margin-bottom:22px;text-wrap:balance;max-width:820px}
+  .pestanas{display:inline-flex;background:var(--claro-2);border-radius:999px;padding:5px;margin-bottom:22px}
+  .pestanas button{border:0;background:none;font:600 16px 'Source Sans 3',sans-serif;color:var(--texto-2);padding:10px 20px;border-radius:999px;cursor:pointer;min-height:44px}
+  .pestanas button[aria-selected="true"]{background:var(--oscuro);color:var(--sobre-oscuro)}
+  .mosaico{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+  .mosaico[hidden]{display:none}
+  .tile{position:relative;height:178px;border-radius:18px;overflow:hidden;background:#fff;border:1px solid var(--claro-2);cursor:pointer;text-align:left;padding:0;font:inherit;color:inherit;width:100%}
+  .tile .cara,.tile .detalle{position:absolute;inset:0;padding:20px;display:flex;flex-direction:column;transition:opacity .25s ease, transform .25s ease}
+  .tile .cara{justify-content:space-between}
+  .tile .ico{width:46px;height:46px;border-radius:13px;background:var(--oscuro);display:grid;place-items:center}
+  .tile svg{width:25px;height:25px;fill:none;stroke:var(--verde);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .tile h3{font-size:21px;line-height:1.15}
+  .tile .mas{position:absolute;top:18px;right:18px;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--claro-2);display:grid;place-items:center;font-size:18px;color:var(--texto-2)}
+  .tile .detalle{background:var(--oscuro);color:var(--sobre-oscuro-2);opacity:0;transform:translateY(10px);justify-content:center;gap:8px;font-size:16px;line-height:1.45}
+  .tile .detalle b{font-family:'Outfit',sans-serif;font-size:19px;color:var(--sobre-oscuro)}
+  .tile .detalle .precio{color:var(--verde);font-weight:700}
+  .tile video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.32}
+  .tile .detalle > *:not(video){position:relative}
+  .tile.abierto .detalle{opacity:1;transform:none}
+  .tile.abierto .cara{opacity:0}
+  @media (hover:hover){.tile:hover .detalle{opacity:1;transform:none}.tile:hover .cara{opacity:0}}
+  @media (min-width:900px){.mosaico{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:600px){
+    .mosaico{grid-template-columns:1fr 1fr;gap:10px}
+    .tile{height:118px}
+    .tile .cara{padding:14px}
+    .tile .ico{width:38px;height:38px;border-radius:11px}
+    .tile svg{width:21px;height:21px}
+    .tile h3{font-size:17px}
+    .tile .mas{top:12px;right:12px;width:24px;height:24px;font-size:15px}
+    .tile.abierto{grid-column:1/-1;height:auto;min-height:118px}
+    .tile.abierto .detalle{position:relative;padding:18px}
+  }
+  .adivinador{margin-top:14px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;border:2px dashed var(--verde);border-radius:18px;padding:16px 20px;text-decoration:none;color:var(--texto-2);font-size:16px}
+  .adivinador b{color:var(--texto)}
+  .adivinador .flecha{color:var(--verde-texto);font-weight:700;white-space:nowrap}
 
-  /* Reparación con tarjeta giratoria */
-  .reparacion{padding:96px 0 88px}
-  .reparacion .contenedor{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:center}
-  .reparacion h2{font-size:clamp(32px,4vw,42px);margin-bottom:14px}
-  .reparacion p.intro{font-size:19px;line-height:1.5;color:var(--texto-2);margin-bottom:22px}
-  .giratoria{background:var(--oscuro);color:var(--sobre-oscuro);border-radius:22px;padding:36px;min-height:320px;display:flex;flex-direction:column;gap:16px}
-  .giratoria .icono{width:52px;height:52px;border-radius:14px;background:rgba(140,198,63,.16);display:grid;place-items:center}
-  .giratoria h3{font-size:28px;line-height:1.15}
-  .giratoria p{font-size:18px;line-height:1.5;color:var(--sobre-oscuro-2)}
-  .giratoria .precio{margin-top:auto;font-family:'Outfit',sans-serif;font-weight:700;font-size:34px;color:var(--verde);min-height:40px}
-  .giratoria .cambiable{transition:opacity .35s}
-  .giratoria.cambiando .cambiable{opacity:0}
-  .puntos{display:flex;gap:4px}
-  .puntos button{width:44px;height:44px;border:0;background:transparent;padding:0;cursor:pointer;display:grid;place-items:center}
-  .puntos button span{display:block;width:28px;height:6px;border-radius:3px;background:#3E5A46;transition:background .3s}
-  .puntos button[aria-current="true"] span{background:var(--verde)}
-
-  /* Así trabajamos */
-  .asi{min-height:440px;display:flex;align-items:center}
-  .asi .velo{background:rgba(22,37,27,.78)}
-  .asi .contenido{padding:72px 24px}
-  .asi h2{font-size:clamp(32px,4.5vw,46px);max-width:740px;text-wrap:balance;margin-bottom:14px}
-  .asi p{font-size:19px;line-height:1.5;max-width:560px;color:#DCE6D6}
-
-  /* También reparamos */
-  .tambien{padding:96px 0 40px}
-  .tambien h2{font-size:clamp(32px,4vw,42px);margin-bottom:12px}
-  .tambien p.intro{font-size:19px;line-height:1.5;max-width:640px;color:var(--texto-2);margin-bottom:44px}
-  .tarjetas{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
-  .tarjeta{display:flex;flex-direction:column;gap:12px}
-  .tarjeta .marco{aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:var(--oscuro-2);position:relative}
-  .tarjeta video{width:100%;height:100%;object-fit:cover;display:block}
-  .tarjeta h3{font-size:23px}
-  .tarjeta p{font-size:17px;line-height:1.5;color:var(--texto-2)}
-
-  /* Pasos */
-  .pasos{padding:88px 0}
-  .pasos h2{font-size:clamp(32px,4vw,42px);margin-bottom:40px}
-  .pasos ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px}
-  .pasos li{border-top:3px solid var(--verde);padding-top:18px;display:flex;flex-direction:column;gap:10px}
-  .pasos .num{font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:var(--verde-texto)}
-  .pasos h3{font-size:24px}
-  .pasos p{font-size:17px;line-height:1.55;color:var(--texto-2)}
+  /* ¿Cómo quieres trabajar? */
+  .cotiza{padding:72px 0;background:var(--claro-2)}
+  .cotiza p.intro{display:none}
+  .opciones{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+  .opcion{position:relative;display:flex;flex-direction:column;gap:6px;text-align:left;padding:22px;border-radius:18px;border:2px solid var(--oscuro);background:#fff;color:var(--texto);font:inherit;font-size:16px;line-height:1.45;cursor:pointer;min-height:120px;justify-content:center}
+  .opcion b{font-family:'Outfit',sans-serif;font-size:23px;line-height:1.15}
+  .opcion > span:last-child{max-height:0;opacity:0;overflow:hidden;transition:max-height .3s ease,opacity .3s ease}
+  .opcion:hover > span:last-child,.opcion:focus-visible > span:last-child,.opcion[aria-selected="true"] > span:last-child{max-height:120px;opacity:1}
+  .opcion .o-tag{align-self:flex-start;font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--claro-2)}
+  .opcion.fuerte{background:var(--oscuro);color:var(--sobre-oscuro-2);border-color:var(--oscuro)}
+  .opcion.fuerte b{color:var(--sobre-oscuro)}
+  .opcion.fuerte .o-tag{background:var(--verde);color:var(--oscuro)}
+  .opcion[aria-selected="true"]{box-shadow:0 0 0 4px var(--verde)}
+  .panel{margin-top:18px;background:#fff;border-radius:18px;padding:22px;display:grid;gap:16px;max-width:720px}
+  .panel[hidden]{display:none}
+  .panel label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:16px}
+  .panel input,.panel select,.panel textarea{font:inherit;font-weight:400;font-size:17px;padding:12px 14px;border-radius:10px;border:1.5px solid #C9D4C1;background:#fff;color:var(--texto)}
+  .panel input:focus,.panel select:focus,.panel textarea:focus{outline:3px solid var(--verde);border-color:var(--verde)}
+  .panel fieldset{border:0;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px}
+  .panel legend{font-weight:600;font-size:16px;margin-bottom:8px}
+  .panel label.chk{flex-direction:row;align-items:center;gap:10px;font-weight:400;padding:10px 12px;border-radius:10px;background:var(--claro)}
+  .panel label.chk input{width:20px;height:20px;accent-color:#3D6B1E}
+  .panel .boton{border:0;cursor:pointer;font-family:inherit;padding:12px 22px;line-height:1.25}
+  .nota-panel{font-size:16px;line-height:1.5;color:var(--texto-2);background:var(--claro);border-left:4px solid var(--verde);padding:12px 14px;border-radius:8px}
 
   /* Contacto */
-  .contacto{background:var(--claro-2)}
-  .contacto .contenedor{padding-top:80px;padding-bottom:80px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:center}
-  .contacto h2{font-size:clamp(32px,4vw,42px);margin-bottom:14px}
-  .contacto p{font-size:18px;line-height:1.55;color:var(--texto-2)}
+  .contacto{background:var(--claro)}
+  .contacto .contenedor{padding-top:64px;padding-bottom:64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;align-items:center}
+  .contacto h2{font-size:clamp(28px,3.6vw,38px);margin-bottom:12px}
+  .contacto p{font-size:17px;line-height:1.55;color:var(--texto-2)}
   .contacto .botones{display:flex;flex-direction:column;gap:12px}
   .contacto .boton-borde{border:2px solid var(--oscuro);color:var(--oscuro)}
   .contacto .guardar{text-align:center;font-weight:600;font-size:16px;padding:10px}
 
   footer{background:var(--oscuro);color:var(--sobre-oscuro-2);padding-bottom:env(safe-area-inset-bottom,0px)}
-  footer .contenedor{padding-top:40px;padding-bottom:40px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:16px}
+  footer .contenedor{padding-top:36px;padding-bottom:96px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:16px}
   footer nav{display:flex;flex-wrap:wrap;gap:6px 20px}
   footer a{color:var(--sobre-oscuro-2)}
   footer a:hover{color:var(--sobre-oscuro)}
   footer .nombre{font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:2px;color:var(--sobre-oscuro)}
 
-
-  /* Para tu negocio */
-  .negocios{padding:88px 0 72px;background:var(--claro)}
-  .negocios h2,.cotiza h2{font-size:clamp(30px,4vw,42px);margin-bottom:12px;text-wrap:balance;max-width:860px}
-  .negocios p.intro,.cotiza p.intro{font-size:19px;line-height:1.5;max-width:660px;color:var(--texto-2);margin-bottom:36px}
-  .servicios{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
-  .servicio{background:#fff;border:1px solid var(--claro-2);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:10px}
-  .servicio .ico{width:48px;height:48px;border-radius:14px;background:var(--oscuro);display:grid;place-items:center}
-  .servicio svg{width:26px;height:26px;fill:none;stroke:var(--verde);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  .servicio h3{font-size:22px}
-  .servicio p{font-size:17px;line-height:1.5;color:var(--texto-2)}
-  .adivinador{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;background:var(--oscuro);color:var(--sobre-oscuro-2);border-radius:18px;padding:22px 24px;text-decoration:none;font-size:17px;line-height:1.45}
-  .adivinador b{color:var(--sobre-oscuro)}
-  .adivinador .flecha{color:var(--verde);font-weight:700;white-space:nowrap}
-
-  /* ¿Cómo quieres trabajar? */
-  .cotiza{padding:88px 0;background:var(--claro-2)}
-  .opciones{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-  .opcion{display:flex;flex-direction:column;gap:8px;text-align:left;padding:24px;border-radius:18px;border:2px solid var(--oscuro);background:#fff;color:var(--texto);font:inherit;font-size:17px;line-height:1.45;cursor:pointer}
-  .opcion b{font-family:'Outfit',sans-serif;font-size:24px;line-height:1.15}
-  .opcion .o-tag{align-self:flex-start;font-size:14px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--claro-2)}
-  .opcion.fuerte{background:var(--oscuro);color:var(--sobre-oscuro-2);border-color:var(--oscuro)}
-  .opcion.fuerte b{color:var(--sobre-oscuro)}
-  .opcion.fuerte .o-tag{background:var(--verde);color:var(--oscuro)}
-  .opcion[aria-selected="true"]{box-shadow:0 0 0 4px var(--verde)}
-  .panel{margin-top:20px;background:#fff;border-radius:18px;padding:24px;display:grid;gap:16px;max-width:720px}
-  .panel[hidden]{display:none}
-  .panel label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:16px}
-  .panel input,.panel select,.panel textarea{font:inherit;font-weight:400;font-size:17px;padding:12px 14px;border-radius:10px;border:1.5px solid #C9D4C1;background:#fff;color:var(--texto)}
-  .panel input:focus,.panel select:focus,.panel textarea:focus{outline:3px solid var(--verde);border-color:var(--verde)}
-  .panel fieldset{border:0;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}
-  .panel legend{font-weight:600;font-size:16px;margin-bottom:8px}
-  .panel label.chk{flex-direction:row;align-items:center;gap:10px;font-weight:400;padding:10px 12px;border-radius:10px;background:var(--claro)}
-  .panel label.chk input{width:20px;height:20px;accent-color:#3D6B1E}
-  .panel .boton{border:0;cursor:pointer;font-family:inherit;padding:12px 22px;line-height:1.25}
-  .nota-panel{font-size:17px;line-height:1.5;color:var(--texto-2);background:var(--claro);border-left:4px solid var(--verde);padding:12px 14px;border-radius:8px}
-
-  /* Botón flotante de WhatsApp */
   .flotante{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:20;width:60px;height:60px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.25)}
-
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.giratoria .cambiable{transition:none}}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.tile .cara,.tile .detalle,.opcion > span:last-child{transition:none}}
 </style>
 </head>
 <body>
-
 <header>
   <div class="contenedor barra">
     <a class="marca" href="#inicio" aria-label="R.E.L.E., inicio">
@@ -173,10 +140,8 @@
       <span>R.E.L.E.</span>
     </a>
     <nav class="menu" aria-label="Secciones">
-      <a class="enlace" href="#negocios">Para tu negocio</a>
+      <a class="enlace" href="#necesitas">Servicios</a>
       <a class="enlace" href="#cotiza">Cotiza</a>
-      <a class="enlace" href="#reparacion">Reparación</a>
-      <a class="enlace" href="#tambien">También hacemos</a>
       <a class="enlace" href="#contacto">Contacto</a>
       <a class="boton boton-verde" href="https://wa.me/528124425417?text=Hola%2C%20vi%20su%20p%C3%A1gina%20y%20me%20gustar%C3%ADa%20informaci%C3%B3n" target="_blank" rel="noopener">WhatsApp</a>
     </nav>
@@ -184,62 +149,80 @@
 </header>
 
 <main>
-  <!-- VIDEO DE FONDO: videos/portada.mp4 -->
-  <section id="inicio" class="con-video portada">
+  <section id="inicio" class="portada">
     <video autoplay muted loop playsinline preload="metadata" poster="videos/portada.jpg" aria-hidden="true"><source src="videos/portada.mp4" type="video/mp4"></video>
     <div class="velo"></div>
     <div class="contenedor contenido">
       <span class="etiqueta">Tu negocio funcionando, aunque tú no estés</span>
       <h1>Reparamos tus equipos y ponemos a trabajar tu negocio</h1>
-      <p>Reparación de computadoras, páginas web, sistemas y asistentes de WhatsApp para negocios en Guadalupe, Monterrey y área metropolitana.</p>
+      <p>Computadoras, páginas web, sistemas y asistentes de WhatsApp en Guadalupe, Monterrey y área metropolitana.</p>
       <div class="acciones">
         <a class="boton boton-verde" href="#cotiza">Cotiza tu proyecto</a>
-        <a class="boton boton-contorno" href="#negocios">Ver lo que hacemos</a>
+        <a class="boton boton-contorno" href="#necesitas">Ver servicios</a>
       </div>
     </div>
   </section>
 
-  <!-- ===== PARA TU NEGOCIO ===== -->
-  <section id="negocios" class="negocios">
+  <section id="necesitas" class="necesitas">
     <div class="contenedor">
-      <h2>Lo que más necesita tu negocio</h2>
-      <p class="intro">No solo reparamos. Hacemos que tu negocio venda más, se organice y conteste a sus clientes aunque tú estés ocupado.</p>
-      <div class="servicios">
-        <article class="servicio">
-          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M7 12h6"/></svg></span>
-          <h3>Páginas web</h3>
-          <p>Que tus clientes te encuentren en Google y te escriban directo a tu WhatsApp.</p>
-        </article>
-        <article class="servicio">
-          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h4"/></svg></span>
-          <h3>Sistemas para tu negocio</h3>
-          <p>Punto de venta, inventario, citas y reportes. Sabes cuánto vendes y qué te falta sin hacer cuentas a mano.</p>
-        </article>
-        <article class="servicio">
-          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1-5A8 8 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/></svg></span>
-          <h3>Asistente de WhatsApp</h3>
-          <p>Contesta a tus clientes, da precios y agenda citas a cualquier hora, aunque tú no estés.</p>
-        </article>
-        <article class="servicio">
-          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h4l3-8 3 16 3-8h3"/></svg></span>
-          <h3>Automatización</h3>
-          <p>Lo que haces a mano todos los días, que se haga solo: avisos, reportes, mensajes y respaldos.</p>
-        </article>
-        <article class="servicio">
-          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.6a10 10 0 0 1 14 0M8.5 16.3a5 5 0 0 1 7 0"/><circle cx="12" cy="20" r="1"/></svg></span>
-          <h3>Wifi para eventos</h3>
-          <p>Internet para tu evento o liga, con tu marca en el QR que escanea la gente.</p>
-        </article>
-        <article class="servicio">
-          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span>
-          <h3>Equipos al día</h3>
-          <p>Mantenimiento de las computadoras de tu oficina para que no se detenga el trabajo.</p>
-        </article>
+      <h2>¿Qué necesitas?</h2>
+      <div class="pestanas" role="tablist" aria-label="Tipo de servicio">
+        <button type="button" role="tab" aria-selected="true" aria-controls="m-negocio" id="p-negocio">Para tu negocio</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="m-repara" id="p-repara">Reparaciones</button>
       </div>
-      <a class="adivinador" href="cuestionario.html">
-        <span><b>¿No sabes qué sistema necesitas?</b> Contesta unas preguntas y El Adivinador te dice qué módulos le sirven a tu negocio.</span>
-        <span class="flecha">Probar El Adivinador →</span>
-      </a>
+      <div class="mosaico" id="m-negocio" role="tabpanel" aria-labelledby="p-negocio">
+        <button class="tile" type="button" aria-expanded="false">
+          <span class="cara"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M7 12h6"/></svg></span><h3>Páginas web</h3><span class="mas" aria-hidden="true">+</span></span>
+          <span class="detalle"><b>Páginas web</b><span>Que tus clientes te encuentren en Google y te escriban directo a tu WhatsApp.</span></span>
+        </button>
+        <button class="tile" type="button" aria-expanded="false">
+          <span class="cara"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h4"/></svg></span><h3>Sistemas para tu negocio</h3><span class="mas" aria-hidden="true">+</span></span>
+          <span class="detalle"><b>Sistemas para tu negocio</b><span>Punto de venta, inventario, citas y reportes. Sabes cuánto vendes sin hacer cuentas a mano.</span><span class="precio">Desde $100 al mes</span></span>
+        </button>
+        <button class="tile" type="button" aria-expanded="false">
+          <span class="cara"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1-5A8 8 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/></svg></span><h3>Asistente de WhatsApp</h3><span class="mas" aria-hidden="true">+</span></span>
+          <span class="detalle"><b>Asistente de WhatsApp</b><span>Contesta a tus clientes, da precios y agenda citas a cualquier hora, aunque tú no estés.</span></span>
+        </button>
+        <button class="tile" type="button" aria-expanded="false">
+          <span class="cara"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h4l3-8 3 16 3-8h3"/></svg></span><h3>Automatización</h3><span class="mas" aria-hidden="true">+</span></span>
+          <span class="detalle"><b>Automatización</b><span>Lo que haces a mano todos los días, que se haga solo: avisos, reportes, mensajes y respaldos.</span></span>
+        </button>
+        <button class="tile" type="button" aria-expanded="false">
+          <span class="cara"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.6a10 10 0 0 1 14 0M8.5 16.3a5 5 0 0 1 7 0"/><circle cx="12" cy="20" r="1"/></svg></span><h3>Wifi para eventos</h3><span class="mas" aria-hidden="true">+</span></span>
+          <span class="detalle"><b>Wifi para eventos</b><span>Internet para tu evento o liga, con tu marca en el QR que escanea la gente.</span></span>
+        </button>
+        <button class="tile" type="button" aria-expanded="false">
+          <span class="cara"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></span><h3>Electrónica a la medida</h3><span class="mas" aria-hidden="true">+</span></span>
+          <span class="detalle"><video muted loop playsinline preload="none" poster="videos/proyectos.jpg" aria-hidden="true"><source src="videos/proyectos.mp4" type="video/mp4"></video><b>Electrónica a la medida</b><span>Proyectos de demostración como riego automático y control PID. Diseñamos y programamos electrónica.</span></span>
+        </button>
+      </div>
+      <div class="mosaico" id="m-repara" role="tabpanel" aria-labelledby="p-repara" hidden>
+        <button class="tile" type="button" aria-expanded="false">
+          <span class="cara"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span><h3>Reparación express</h3><span class="mas" aria-hidden="true">+</span></span>
+          <span class="detalle"><b>Reparación express</b><span>Tus equipos listos el mismo día, sean 2 o 30. Ideal para oficinas que no pueden parar.</span><span class="precio">Costo adicional</span></span>
+        </button>
+        <button class="tile" type="button" aria-expanded="false">
+          <span class="cara"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span><h3>Diagnóstico</h3><span class="mas" aria-hidden="true">+</span></span>
+          <span class="detalle"><b>Diagnóstico</b><span>Revisamos tu equipo a fondo y te explicamos qué tiene y cuánto costaría repararlo, antes de reparar.</span></span>
+        </button>
+        <button class="tile" type="button" aria-expanded="false">
+          <span class="cara"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span><h3>Mantenimiento preventivo</h3><span class="mas" aria-hidden="true">+</span></span>
+          <span class="detalle"><b>Mantenimiento preventivo</b><span>Limpieza interna, ventiladores, temperatura y sistema, para que no se caliente ni se alente.</span><span class="precio">$300 c/u</span></span>
+        </button>
+        <button class="tile" type="button" aria-expanded="false">
+          <span class="cara"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.6-.4-.4-2.6z"/></svg></span><h3>Reparación de equipos</h3><span class="mas" aria-hidden="true">+</span></span>
+          <span class="detalle"><b>Reparación de equipos</b><span>Computadoras y laptops. Te damos el precio exacto después del diagnóstico. Sin sorpresas.</span><span class="precio">Según diagnóstico</span></span>
+        </button>
+        <button class="tile" type="button" aria-expanded="false">
+          <span class="cara"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="10" rx="5"/><path d="M7 10v4M5 12h4M16 11h.01M18 13h.01"/></svg></span><h3>Consolas y pantallas</h3><span class="mas" aria-hidden="true">+</span></span>
+          <span class="detalle"><video muted loop playsinline preload="none" poster="videos/consolas-pantallas.jpg" aria-hidden="true"><source src="videos/consolas-pantallas.mp4" type="video/mp4"></video><b>Consolas y pantallas</b><span>Limpieza y mantenimiento para que tu consola no se caliente ni haga ruido.</span></span>
+        </button>
+        <button class="tile" type="button" aria-expanded="false">
+          <span class="cara"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></svg></span><h3>Electrónicos del día a día</h3><span class="mas" aria-hidden="true">+</span></span>
+          <span class="detalle"><video muted loop playsinline preload="none" poster="videos/electronicos.jpg" aria-hidden="true"><source src="videos/electronicos.mp4" type="video/mp4"></video><b>Electrónicos del día a día</b><span>Audífonos y otros aparatos. Si dejó de funcionar, lo revisamos antes de que compres uno nuevo.</span></span>
+        </button>
+      </div>
+      <a class="adivinador" href="cuestionario.html"><span><b>¿No sabes qué sistema necesitas?</b> El Adivinador te lo dice en unas preguntas.</span><span class="flecha">Probar →</span></a>
     </div>
   </section>
 
@@ -308,95 +291,10 @@
     </div>
   </section>
 
-  <section id="express" class="express">
-    <div class="contenedor">
-      <div>
-        <h2>¿Tu equipo falló? Reparación express</h2>
-        <p>Tus equipos listos el mismo día, sean 2 o 30. Ideal para oficinas que no pueden parar.</p>
-        <small>El servicio express tiene un costo adicional.</small>
-      </div>
-      <ul>
-        <li>Limpieza y mantenimiento rápido</li>
-        <li>Diagnóstico de fallas</li>
-        <li>Formateo e instalación de programas</li>
-        <li>Respaldo de información</li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="reparacion" class="reparacion">
-    <div class="contenedor">
-      <div>
-        <h2>Reparación y mantenimiento</h2>
-        <p class="intro">Computadoras de escritorio y laptops. Si enciende raro, se apaga solo, se calienta o va lento, lo revisamos y te decimos qué tiene antes de cobrarte una reparación.</p>
-        <a class="boton boton-oscuro" href="https://wa.me/528124425417?text=Hola%2C%20quiero%20preguntar%20por%20mi%20equipo" target="_blank" rel="noopener">Pregunta por tu equipo</a>
-      </div>
-      <div class="giratoria" id="giratoria" aria-live="polite">
-        <span class="icono"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8CC63F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span>
-        <h3 class="cambiable" id="g-titulo">Diagnóstico de computadora</h3>
-        <p class="cambiable" id="g-desc">Revisamos tu equipo a fondo y te explicamos qué tiene y cuánto costaría repararlo.</p>
-        <div class="precio cambiable" id="g-precio"></div>
-        <div class="puntos" role="group" aria-label="Elegir servicio">
-          <button type="button" aria-label="Diagnóstico de computadora" aria-current="true"><span></span></button>
-          <button type="button" aria-label="Mantenimiento preventivo"><span></span></button>
-          <button type="button" aria-label="Reparación de equipos"><span></span></button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- VIDEO DE FONDO: videos/asi-trabajamos.mp4 -->
-  <section class="con-video asi">
-    <video autoplay muted loop playsinline preload="none" poster="videos/asi-trabajamos.jpg" aria-hidden="true"><source src="videos/asi-trabajamos.mp4" type="video/mp4"></video>
-    <div class="velo"></div>
-    <div class="contenedor contenido">
-      <h2>Así trabajamos: con cuidado, la herramienta correcta y sin tecnicismos</h2>
-      <p>Cada equipo se revisa a mano y te decimos qué tiene en palabras claras.</p>
-    </div>
-  </section>
-
-  <section id="tambien" class="tambien">
-    <div class="contenedor">
-      <h2>También reparamos y construimos</h2>
-      <p class="intro">Además de computadoras, cuidamos otros equipos de tu casa y armamos proyectos de electrónica.</p>
-      <div class="tarjetas">
-        <!-- VIDEO: videos/consolas-pantallas.mp4 -->
-        <article class="tarjeta">
-          <div class="marco"><video autoplay muted loop playsinline preload="none" poster="videos/consolas-pantallas.jpg" aria-hidden="true"><source src="videos/consolas-pantallas.mp4" type="video/mp4"></video></div>
-          <h3>Consolas y pantallas</h3>
-          <p>Mantenimiento y limpieza para que tu consola no se caliente ni haga ruido, y tus pantallas funcionen como deben.</p>
-        </article>
-        <!-- VIDEO: videos/electronicos.mp4 -->
-        <article class="tarjeta">
-          <div class="marco"><video autoplay muted loop playsinline preload="none" poster="videos/electronicos.jpg" aria-hidden="true"><source src="videos/electronicos.mp4" type="video/mp4"></video></div>
-          <h3>Electrónicos del día a día</h3>
-          <p>Audífonos y otros aparatos que usas diario. Si dejó de funcionar, lo revisamos antes de que compres uno nuevo.</p>
-        </article>
-        <!-- VIDEO: videos/proyectos.mp4 -->
-        <article class="tarjeta">
-          <div class="marco"><video autoplay muted loop playsinline preload="none" poster="videos/proyectos.jpg" aria-hidden="true"><source src="videos/proyectos.mp4" type="video/mp4"></video></div>
-          <h3>Proyectos de electrónica y automatización</h3>
-          <p>Proyectos de demostración, como riego automático y sistemas de control PID. Diseñamos y programamos electrónica a la medida.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="pasos">
-    <div class="contenedor">
-      <h2>Cómo trabajamos</h2>
-      <ol>
-        <li><span class="num">Paso 1</span><h3>Nos escribes</h3><p>Por WhatsApp o llamada nos cuentas qué le pasa a tu equipo.</p></li>
-        <li><span class="num">Paso 2</span><h3>Revisamos y cotizamos</h3><p>Te explicamos la falla en palabras claras y el costo antes de empezar.</p></li>
-        <li><span class="num">Paso 3</span><h3>Te lo entregamos listo</h3><p>Tu equipo limpio, funcionando y con recomendaciones para que dure más.</p></li>
-      </ol>
-    </div>
-  </section>
-
   <section id="contacto" class="contacto">
     <div class="contenedor">
       <div>
-        <h2>¿Tu equipo o tu negocio necesitan ayuda? Escríbenos</h2>
+        <h2>Escríbenos</h2>
         <p>Lunes a viernes de 9 a 21 h (miércoles hasta las 15 h). Sábados servicio a domicilio en Guadalupe, Monterrey y área metropolitana.</p>
       </div>
       <div class="botones">
@@ -423,47 +321,6 @@
   </div>
 </footer>
 
-<script>
-(function () {
-  var servicios = [
-    { t: 'Diagnóstico de computadora', d: 'Revisamos tu equipo a fondo y te explicamos qué tiene y cuánto costaría repararlo.', p: '' },
-    { t: 'Mantenimiento preventivo de computadoras y laptops', d: 'Limpieza interna de polvo, revisión de ventiladores y temperatura, y limpieza del sistema para que tu equipo no se caliente ni se alente.', p: '$300 c/u' },
-    { t: 'Reparación de equipos', d: 'Después del diagnóstico te damos el precio exacto antes de reparar. Sin sorpresas.', p: 'Según diagnóstico' }
-  ];
-  var caja = document.getElementById('giratoria');
-  var titulo = document.getElementById('g-titulo'), desc = document.getElementById('g-desc'), precio = document.getElementById('g-precio');
-  var botones = caja.querySelectorAll('.puntos button');
-  var actual = 0, temporizador = null;
-  var sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function mostrar(i) {
-    actual = i;
-    caja.classList.add('cambiando');
-    setTimeout(function () {
-      titulo.textContent = servicios[i].t; desc.textContent = servicios[i].d; precio.textContent = servicios[i].p;
-      botones.forEach(function (b, j) { b.setAttribute('aria-current', j === i ? 'true' : 'false'); });
-      caja.classList.remove('cambiando');
-    }, sinMovimiento ? 0 : 300);
-  }
-  function iniciar() { if (!sinMovimiento) temporizador = setInterval(function () { mostrar((actual + 1) % servicios.length); }, 4000); }
-  botones.forEach(function (b, i) { b.addEventListener('click', function () { clearInterval(temporizador); mostrar(i); }); });
-  iniciar();
-
-  // Videos: solo se reproducen cuando están en pantalla (ahorra datos y batería)
-  var videos = document.querySelectorAll('video');
-  if (sinMovimiento) { videos.forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); }); return; }
-  if ('IntersectionObserver' in window) {
-    var obs = new IntersectionObserver(function (entradas) {
-      entradas.forEach(function (e) {
-        var v = e.target;
-        if (e.isIntersecting) { if (v.preload === 'none') { v.preload = 'auto'; v.load(); } var p = v.play(); if (p && p.catch) p.catch(function () {}); }
-        else { v.pause(); }
-      });
-    }, { threshold: 0.15 });
-    videos.forEach(function (v) { obs.observe(v); });
-  }
-})();
-</script>
 <a class="flotante" href="https://wa.me/528124425417?text=Hola%2C%20vi%20su%20p%C3%A1gina%20y%20me%20gustar%C3%ADa%20informaci%C3%B3n" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
   <svg width="32" height="32" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.5-.3z"/></svg>
 </a>
@@ -505,6 +362,39 @@
             '• Quiero empezar: ' + f.cuando.value;
     enviar(t);
   });
+})();
+</script>
+<script>
+(function () {
+  // Pestañas de servicios
+  var pest = [['p-negocio','m-negocio'],['p-repara','m-repara']];
+  pest.forEach(function (par) {
+    document.getElementById(par[0]).addEventListener('click', function () {
+      pest.forEach(function (o) {
+        var on = o[0] === par[0];
+        document.getElementById(o[0]).setAttribute('aria-selected', on ? 'true' : 'false');
+        document.getElementById(o[1]).hidden = !on;
+      });
+    });
+  });
+  // Tarjetas: se abren al tocar (celular) o al pasar el mouse (computadora)
+  var sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.tile').forEach(function (t) {
+    var v = t.querySelector('video');
+    function play() { if (v && !sinMovimiento) { if (v.preload === 'none') { v.preload = 'auto'; v.load(); } var p = v.play(); if (p && p.catch) p.catch(function () {}); } }
+    function pause() { if (v) v.pause(); }
+    t.addEventListener('click', function () {
+      var abrir = !t.classList.contains('abierto');
+      document.querySelectorAll('.tile.abierto').forEach(function (o) { if (o !== t) { o.classList.remove('abierto'); o.setAttribute('aria-expanded','false'); var ov = o.querySelector('video'); if (ov) ov.pause(); } });
+      t.classList.toggle('abierto', abrir); t.setAttribute('aria-expanded', abrir ? 'true' : 'false');
+      abrir ? play() : pause();
+    });
+    t.addEventListener('mouseenter', play);
+    t.addEventListener('mouseleave', function () { if (!t.classList.contains('abierto')) pause(); });
+  });
+  // Video de portada: solo corre cuando se ve
+  var portada = document.querySelector('.portada video');
+  if (sinMovimiento && portada) { portada.removeAttribute('autoplay'); portada.pause(); }
 })();
 </script>
 </body>
